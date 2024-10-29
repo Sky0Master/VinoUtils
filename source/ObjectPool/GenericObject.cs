@@ -19,7 +19,7 @@ public class GenericObject : MonoBehaviour, IPooledObject
 
     public void DiscardToPool()
     {
-        MyPooler.ObjectPooler.Instance.ReturnToPool(poolTag, this.gameObject);
+        ObjectPooler.Instance.ReturnToPool(poolTag, this.gameObject);
         isActive = false;
     }
 
