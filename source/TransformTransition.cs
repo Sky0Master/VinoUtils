@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 
 namespace VinoUtility{
-public class TransformAnimation : MonoBehaviour
+public class TransformTransition : MonoBehaviour
 {
-    Transform endTrans;
+    public Transform endTrans;
     
     public float duration = 1f;
     public UnityEvent endEvent;
@@ -21,6 +21,5 @@ public class TransformAnimation : MonoBehaviour
         StartCoroutine(LerpUtility.Lerp(stRot.eulerAngles,endTrans.rotation.eulerAngles,duration, rot => transform.rotation = Quaternion.Euler(rot)));
         StartCoroutine(LerpUtility.Lerp(stScale,endTrans.localScale,duration, scale => transform.localScale = scale, ()=>{endEvent?.Invoke();}));
     }
-   
 }
 }

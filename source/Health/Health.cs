@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace Unity.FPS.Game
+namespace VinoUtility.Game
 {
     public class Health : MonoBehaviour
     {

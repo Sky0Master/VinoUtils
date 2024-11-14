@@ -1,12 +1,12 @@
-﻿using Unity.FPS.Game;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Unity.FPS.UI
+namespace VinoUtility.Game
 {
     public class WorldspaceHealthBar : MonoBehaviour
     {
-        [Tooltip("Health component to track")] public Health Health;
+        [Tooltip("Health component to track")] public Health health;
 
         [Tooltip("Image component displaying health left")]
         public Image HealthBarImage;
@@ -20,14 +20,17 @@ namespace Unity.FPS.UI
         void Update()
         {
             // update health bar value
-            HealthBarImage.fillAmount = Health.CurrentHealth / Health.MaxHealth;
-
-            // rotate health bar to face the camera/player
-            HealthBarPivot.LookAt(Camera.main.transform.position);
+            HealthBarImage.fillAmount = health.GetRatio();
 
             // hide health bar if needed
             if (HideFullHealthBar)
                 HealthBarPivot.gameObject.SetActive(HealthBarImage.fillAmount != 1);
+            if(health.IsCritical())
+            {
+                var newColor = HealthBarImage.color;
+                newColor.a = 0.6f + 0.4f*Mathf.Sin( 1f / health.GetRatio()  * Time.time);
+                HealthBarImage.color = newColor;
+            }
         }
     }
 }
