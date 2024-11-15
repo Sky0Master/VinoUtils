@@ -9,16 +9,13 @@ public class CameraFollow : MonoBehaviour
     public string TargetTag = "Player";
     // public float SmoothTime;
     [SerializeField]
-    float SmoothSpeed = 0.7f;
+    float SmoothSpeed = 0.01f;
     bool _isFollow = true;
 
     Camera _cam;
     void Start()
     {
         _cam = GetComponent<Camera>();
-        if(Target == null){
-            Target = GameObject.FindWithTag(TargetTag)?.transform;
-        }
     }
 
     IEnumerator<WaitForSeconds> FocusOn(Transform focusTarget, float switchDuration, float focusDuration, float zoomSize, bool isFollow)
@@ -84,7 +81,9 @@ public class CameraFollow : MonoBehaviour
         _isFollow = false;
     }
     private void LateUpdate() {
-        
+        if(Target == null){
+            Target = GameObject.FindWithTag(TargetTag)?.transform;
+        }
         if(Target && _isFollow)
         {
             //Legacy
